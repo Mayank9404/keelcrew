@@ -1,0 +1,145 @@
+{
+  "$comment": "The one source for Keelcrew's fixed rules. The policy hook, the helper, the keelctl command and the board read this file; a team pack (packs/<name>/pack.json) adds to `policy` and `risk.patterns` but can never remove from them. `ship.actions` maps each chained part of a shell command to the actions a ship choice allows.",
+  "schemaVersion": 1,
+  "ship": {
+    "$comment_mode": "defaultMode is how engineers ship when config.json has no shipMode (the board's Settings switch): free pushes their branch and opens or updates their own PR on their own; card waits for the launch card.",
+    "defaultMode": "free",
+    "choices": ["Open PR", "Draft PR", "Push only", "Not yet"],
+    "allows": {
+      "Open PR": ["push", "pr", "pr-draft", "pr-update"],
+      "Draft PR": ["push", "pr-draft"],
+      "Push only": ["push"]
+    },
+    "grantTtlMinutes": 20160,
+    "questionHeader": "^ship\\b",
+    "actions": [
+      {"action": "push", "pattern": "\\bgit\\s+push\\b"},
+      {"action": "pr-draft", "pattern": "\\bgh\\s+pr\\s+(create|new)\\b.*\\s(--draft|-d)\\b"},
+      {"action": "pr", "pattern": "\\bgh\\s+pr\\s+(create|new)\\b(?!.*\\s(--draft|-d)\\b)"},
+      {"action": "pr-update", "pattern": "\\bgh\\s+pr\\s+(ready|edit|comment|review|close|reopen)\\b"}
+    ]
+  },
+  "policy": {
+    "denyBash": [
+      {"pattern": "\\bgit\\s+push\\b[^;&|\\n]*(\\s-f\\b|--force|--force-with-lease|\\s\\+\\S)", "why": "force-push is never allowed"},
+      {"pattern": "\\bgit\\s+push\\b[^;&|\\n]*\\s--no-verify\\b", "why": "skipping git hooks on a push is never allowed"},
+      {"pattern": "\\bgit\\b[^;&|\\n]*\\s(-c\\s*|--config-env[=\\s]\\s*)(['\"]core\\.hookspath|core\\.hookspath(?![^\\s;&|]*\\s+(-c\\s+\\S+\\s+)*(diff|show|log|status|rev-parse|ls-files|cat-file|blame|grep)(\\s|$)))", "flags": "i", "why": "overriding git hooks on the command line is never allowed"},
+      {"pattern": "\\bgit\\b[^;&|\\n]*\\sconfig\\b(?![^;&|\\n]*\\s(--get|--get-all|--get-regexp|--list|-l|--show-origin|--show-scope|get|list)\\b)(?!(?![^;&|\\n]*\\s(--unset\\S*|--add|--replace-all|--edit|-e|set|unset)\\b)[^;&|\\n]*\\s(core\\.hookspath|extensions\\.worktreeconfig)\\s*($|[;&|\\n]))[^;&|\\n]*\\b(core\\.hookspath|extensions\\.worktreeconfig)\\b", "flags": "i", "why": "changing where git looks for hooks is never allowed"},
+      {"pattern": "\\bGIT_CONFIG_(PARAMETERS|COUNT|KEY_\\d+|VALUE_\\d+)\\s*=", "why": "setting git config through the environment is never allowed"},
+      {"pattern": "\\bgh\\s+((-R|--repo)(=|\\s+)\\S+\\s+)*pr\\s+((-R|--repo)(=|\\s+)\\S+\\s+)*merge\\b", "why": "merging pull requests is for people"},
+      {"pattern": "\\b(gh\\s+api|curl)\\b(?=[^;&|\\n]*/pulls/[^/\\s'\\\"]+/merge\\b)(?=[^;&|\\n]*\\s(-X\\s*|--method[\\s=]+|--request[\\s=]+)['\\\"]?PUT\\b)|\\bgh\\s+api\\b[^;&|\\n]*\\b(mergePullRequest|enablePullRequestAutoMerge)\\b", "flags": "i", "why": "merging pull requests is for people"},
+      {"pattern": "\\bgit\\b[^;&|\\n]*\\s--exec-path=|\\bGIT_EXEC_PATH\\s*=", "why": "running git from another folder of its own commands is never allowed"},
+      {"pattern": "\\bgh\\s+alias\\s+(set|import)\\b", "why": "gh aliases can hide a merge; spell the gh command out"},
+      {"pattern": "\\bgit\\b[^;&|\\n]*\\sconfig\\b[^;&|\\n]*\\s(--remove-section|--rename-section|remove-section|rename-section)\\s+['\\\"]?(core|extensions)['\\\"]?(\\s|$)", "flags": "i", "why": "removing git's core or extensions settings is never allowed"},
+      {"pattern": "\\bgit\\b[^;&|\\n]*\\sconfig\\b[^;&|\\n]*\\s(-e|--edit|edit)(\\s|$)", "why": "editing git config by hand is never allowed"},
+      {"pattern": "\\bgit\\b[^;&|\\n]*\\s['\"]?config\\b['\"]?(?!\\s+['\"]?(get|list)['\"]?(\\s|$))(?!(?![^;&|\\n]*\\s--comment\\b)(\\s+(-f|--file|--blob|-t|--type|--default)\\s+(?!-)[^\\s;&|]+|\\s+-[\\w-]+(=[^\\s;&|]*)?)*\\s+(--get[\\w-]*|--list|-l)(?=[\\s=]|$))(?!(?![^;&|\\n]*\\s(--unset\\S*|--add|--replace-all|--edit|-e|set|unset)\\b)(\\s+(-f|--file|--blob|-t|--type|--default)\\s+(?!-)[^\\s;&|]+|\\s+-[\\w-]+(=[^\\s;&|]*)?)*\\s+['\"]?(push\\.(pushoption|default)|remote\\.pushdefault|remote\\.[^\\s;&|'\"]+\\.(pushurl|url|push)|url\\.[^;&|\\n]*?\\.(push)?insteadof|branch\\.[^\\s;&|'\"]+\\.(pushremote|remote|merge)|include\\.path|includeif\\.[^;&|\\n]*?\\.path)['\"]?(\\s+\\d*>>?&?\\S*)*\\s*($|[;&|\\n]))[^;&|\\n]*(?<![\\w.-])(push\\.(pushoption|default)|remote\\.pushdefault|remote\\.[^\\s;&|'\"]+\\.(pushurl|url|push)|url\\.[^;&|\\n]*?\\.(push)?insteadof|branch\\.[^\\s;&|'\"]+\\.(pushremote|remote|merge)|include\\.path|includeif\\.[^;&|\\n]*?\\.path)(?![\\w.-])", "flags": "i", "why": "changing where a push goes or what it asks the server (push options, remote and url settings, includes) is never allowed"},
+      {"pattern": "\\bgit\\b[^;&|\\n]*\\sconfig\\b[^;&|\\n]*\\s(--remove-section|--rename-section|remove-section|rename-section)\\s+(\\S+\\s+)?['\"]?(remote|url|branch|push|include|includeif)(?=[\\s.'\"]|$)", "flags": "i", "why": "renaming or removing git remote, url, branch, push or include settings is never allowed"},
+      {"pattern": "(^|[\\s/;&|(\\x60])git-(send-pack|http-push|http-fetch|http-backend|receive-pack|upload-pack|upload-archive|remote-[\\w-]+|imap-send|send-email|credential[\\w-]*|shell|daemon)\\b", "why": "git's transport plumbing is never allowed; use git push"},
+      {"pattern": "\\bCLAUDE_CODE_(HOST_)?SESSION_ID\\s*=|(?<![-\\w.])(unset|env|export\\s+-\\w*n|declare\\s+\\+x|typeset\\s+\\+x)\\b[^;&|\\n]*\\bCLAUDE_CODE_(HOST_)?SESSION_ID\\b|(?<![-\\w.])env\\s+((-\\S+|\\w+=\\S*)\\s+)*(-[a-zA-Z]*i[a-zA-Z]*|--ignore-environment|-)(\\s|$)|\\bexec\\s+-\\w*c", "why": "changing a session's identity, or running a command without it, is never allowed"},
+      {"pattern":"(^\\s*|[;&|({\\x60\\n]\\s*|\\b(then|do|else|elif|if|while|until)\\s+|!\\s+|=[\"']?|\\)\\s*|\\s-(exec|execdir|ok|okdir)\\s+|<<<\\s*[\"']?)(\\w+=[^\\s;&|]*\\s+)*((xargs|env|command(?!\\s+-[vV]\\b)|nohup|time|timeout|watch|nice|stdbuf|caffeinate|exec|setsid)\\b[^;&|\\n]*?\\s|(\\S*/)?(ba|z|k|da)?sh\\s+(-\\w+\\s+)*-\\w*c\\w*\\s+['\"]?)?(\\w+=[^\\s;&|]*\\s+)*(\\S*/|\\\\|[\"'])?(helm[ \\t]+(?!(lint|template|version|list|ls|status|history|show|search|env|help|completion)\\b|[;|)]|&(?!>))|kubectl\\b[\"']?(?!(\\s+(-n\\s*[^\\s'\"\\\\]+|--(namespace|context|kubeconfig|cluster|user|request-timeout)(=|\\s+)[^\\s'\"\\\\]+|--[\\w-]+=[^\\s'\"\\\\]+|-v=?\\d+|--insecure-skip-tls-verify))*\\s+(get|describe|logs|top|explain|api-resources|api-versions|version|cluster-info|events|wait|auth\\s+(can-i|whoami)|rollout\\s+(status|history)|config\\s+(current-context|get-contexts|get-clusters|view(?![^;&|\\n]*--raw)))(?=\\s|$|[;&|)]))|terraform\\b|ansible-playbook\\b)","flags":"i","why":"changes to environments are never allowed"},
+      {"pattern":"(^\\s*|[;&|({\\x60\\n]\\s*|\\b(then|do|else|elif|if|while|until)\\s+|!\\s+|=[\"']?|\\)\\s*|\\s-(exec|execdir|ok|okdir)\\s+|<<<\\s*[\"']?)(\\w+=[^\\s;&|]*\\s+)*((xargs|env|command|nohup|time|timeout|watch|nice|stdbuf|caffeinate|exec|setsid)\\b[^;&|\\n]*?\\s|(\\S*/)?(ba|z|k|da)?sh\\s+(-\\w+\\s+)*-\\w*c\\w*\\s+['\"]?)?(\\w+=[^\\s;&|]*\\s+)*(\\S*/|\\\\|[\"'])?kubectl\\b[^;&|\\n]*([\\s,/]secrets?(\\.[\\w.]*)?(?=[\\s,/]|$)|%[0-9a-f]{2}|\\$\\(|\\x60|\\s-(f|k)(\\s|=)|--raw[=\\s]+\\S*/proxy\\b)","flags":"i","why":"kubectl that could read secrets or reach into the cluster is never allowed"},
+      {"pattern": "\\bpsql\\b(?:[^;&|\\n\"']|\"[^\"]*\"|'[^']*')*?(?:\"(?:(?:[^\"'(;]|'[^']*')*[;(])*|'(?:[^'(;]*[;(])*|<<[\\s\\S]*?[\\n;])\\s*((explain|analyze)\\s+)*(insert|update|delete|drop|alter|truncate|create|grant)\\b", "flags": "i", "why": "database writes are never allowed"},
+      {"pattern": "\\bclaude(\\s+-\\S+)*\\s+(auth(\\s+-\\S+)*\\s+(login|logout)|config(\\s+-\\S+)*\\s+(set|add|remove)|mcp(\\s+-\\S+)*\\s+(add|remove)|plugins?(\\s+-\\S+)*\\s+(install|uninstall|enable|disable|update|marketplace(\\s+-\\S+)*\\s+(add|remove|update)))\\b", "why": "changing Claude configuration is for people"},
+      {"pattern": "(\\b(cat|less|head|tail)[ \\t]+([^\\s;&|]+[ \\t]+)*|(^|[;&|({\\n]\\s*|\\b(then|do)\\s+)(source|\\.)\\s+)['\"]?(\\S*\\/)?\\.env(?!\\.(example|sample|template|dist)\\b)(\\.[\\w-]+)?(?=$|[\\s;&|)'\"\\/])", "why": "reading .env files is off limits; run the app with its env file instead"}
+    ],
+    "githubWrite": {
+      "$comment": "Every gh command (one that starts a chained part, or follows $(, a backtick, env, xargs and the like) writes to GitHub unless it matches `reads`. A gh api call reads unless `apiWrite` matches: a write method, fields without -X GET (gh then POSTs), --input, or graphql unless its query is one plain quoted `query` or `{` string with no mutation (and only plain fields, --jq, --paginate or --cache beside it). Pull request writes a ship choice covers go by ship.actions instead. Each is checked per chained part.",
+      "command": "(^|\\$\\(|`|\\(|\\{\\s|-c\\s+['\"]|(^|\\s)(do|then|else|if|while|until|!|xargs|env|exec|command|time|nohup|watch|timeout\\s+\\S+)(\\s+-\\S+)*\\s+|^(\\w+=\\S*\\s+)+)(\\S*/)?gh\\s+[\\w-]",
+      "reads": "\\bgh\\s+(--version|--help|-h|help|version|status|browse|completion|search\\s+\\S+|(pr|issue)\\s+(list|view|status|checks|diff|checkout)|issue\\s+develop\\s+(\\S+\\s+)*(-l|--list)|repo\\s+(view|list|clone)|run\\s+(list|view|watch|download)|workflow\\s+(list|view)|release\\s+(list|view|download)|auth\\s+status|label\\s+list|gist\\s+(list|view)|cache\\s+list|(secret|variable)\\s+list|variable\\s+get|ruleset\\s+(list|view|check)|org\\s+list|project\\s+(list|view|field-list|item-list)|codespace\\s+(list|view)|extension\\s+(list|search|browse)|alias\\s+list|config\\s+(get|list)|attestation\\s+(verify|download))(\\s|$)",
+      "api": "\\bgh\\s+api\\b",
+      "apiWrite": "\\bgh\\s+api\\s+graphql\\b(?!(\\s+(--paginate|--slurp|(--jq|-q|--template|-t|--cache)\\s+('[^']*'|\"[^\"$`\\\\]*\"|[^\\s'\"$`\\\\]+)|(-f|-F|--field|--raw-field)\\s+(?!query=)[A-Za-z_]\\w*=[\\w.:/-]*))*\\s+(-f|--raw-field)\\s+query=('\\s*(query\\b|\\{)(?:(?!mutation)[^'])*'|\"\\s*(query\\b|\\{)(?:(?!mutation)[^\"$`\\\\])*\")(\\s+(--paginate|--slurp|(--jq|-q|--template|-t|--cache)\\s+('[^']*'|\"[^\"$`\\\\]*\"|[^\\s'\"$`\\\\]+)|(-f|-F|--field|--raw-field)\\s+(?!query=)[A-Za-z_]\\w*=[\\w.:/-]*))*\\s*$)|\\bgh\\s+api\\b(?=.*\\s(-X\\s*|--method[\\s=]+)['\"]?(POST|PATCH|PUT|DELETE)\\b)|\\bgh\\s+api\\b(?!\\s+graphql\\b)(?!.*\\s(-X\\s*|--method[\\s=]+)['\"]?(GET|HEAD)\\b)(?=.*\\s(-f|-F|--field\\b|--raw-field\\b|--input\\b))",
+      "flags": "i",
+      "why": "this writes to GitHub"
+    },
+    "protectedBranches": ["main", "master"],
+    "secretPath": "(^|\\/)(\\.env(?!\\.(example|sample|template|dist)$)(\\.[\\w-]+)?|[\\w.-]+\\.(pem|key|p12|pfx)|id_(rsa|ed25519)\\w*|credentials(\\.json)?|\\.netrc|\\.pgpass)$",
+    "crewFiles": "\\.keelcrew\\/(grants|posts|denials|alerts|githooks|locks|packs|crew\\.json|config\\.json|memory|ledger|org\\.json|org|spend\\.json|merges\\.json|usage\\.json|phone-grants\\.json|cleared)",
+    "claudeSettings": "(^|\\/)\\.claude\\/settings(\\.local)?\\.json$",
+    "crewFileNames": "^(grants|posts|denials|alerts|githooks|locks|packs|crew\\.json|config\\.json|memory|ledger|org\\.json|org|spend\\.json|merges\\.json|usage\\.json|phone-grants\\.json|cleared)(\\/|$)",
+    "gitInternals": "(^|\\/)\\.git(\\/|$)",
+    "localTools": ["Read", "ReportFindings", "Grep", "Glob", "LS", "TodoWrite", "TodoRead", "Task", "Agent", "Skill", "ToolSearch", "WebSearch", "WebFetch", "ExitPlanMode", "EnterPlanMode", "SendMessage", "SubagentHandback", "TaskStop", "TaskOutput", "TaskCreate", "TaskGet", "TaskList", "TaskUpdate", "BashOutput", "KillShell", "KillBash", "ListMcpResourcesTool", "ReadMcpResourceTool", "Artifact", "ArtifactData", "ArtifactComments", "EnterWorktree", "ExitWorktree", "SlashCommand", "LSP", "NotebookRead", "Monitor", "Workflow", "ScheduleWakeup", "CronCreate", "CronDelete", "CronList", "PushNotification", "StructuredOutput", "ArtifactCheck", "SearchPlugins", "ListPlugins", "SuggestPluginInstall", "ListSkills", "SearchSkills", "ListAgents", "ReadMcpResourceDirTool", "SendUserFile", "SuggestSkills"],
+    "boardTimes": {"fields": ["ts", "createdAt", "handledAt", "heartbeatAt", "updatedAt", "at"], "roundFields": ["ts", "heartbeatAt", "updatedAt"], "aheadMs": 30000, "roundMs": 100000, "slackMs": 60000},
+    "shellTempPaths": "^(/dev/(null|stdout|stderr|tty|fd/\\d+)$|/(private/)?tmp(/|$)|/(private/)?var/folders/)",
+    "untrustedTools": "^mcp__(terminal|ccd_[a-z_]+|scheduled-tasks|mcp-registry|Claude_Browser|claude-in-chrome|keelcrew[-_]local)__",
+    "sendTools": "^mcp__[^_].*__(?![\\w-]*(?<!send_?)draft)[\\w-]*(send|reply|forward|post(_\\w*)?message|publish)[\\w-]*$",
+    "readVerbs": ["get", "list", "search", "read", "fetch", "query", "find", "describe", "explain", "whoami", "discover", "guide", "check", "lookup", "view", "show", "preview", "visualize", "analyze", "aggregate", "count", "inspect", "download", "wait", "validate"],
+    "writeVerbs": ["create", "update", "delete", "remove", "send", "post", "put", "patch", "move", "upload", "publish", "trash", "untrash", "forward", "rename", "copy", "duplicate", "restore", "respond", "reply", "set", "modify", "spawn", "stop", "sync", "add", "edit", "transition", "write", "save", "submit", "insert", "replace", "archive", "merge", "approve", "reject", "assign", "invite", "share", "comment", "mark", "batch", "run", "execute", "trigger", "deploy", "cancel", "convert", "generate", "import", "export", "apply", "enable", "disable", "start", "release", "register", "link", "unlink", "upsert", "append", "clear", "reset", "close", "lock", "unlock", "pin", "unpin", "subscribe", "unsubscribe", "schedule", "bulk", "purge", "revoke", "grant", "connect", "disconnect", "install", "uninstall", "label", "checkpoint"],
+    "readTools": ["executeRead", "atlassianUserInfo", "getAccessibleAtlassianResources"],
+    "readOnlyServers": ["^mcp__keelcrew[-_]local__(ping|crew_state|session_events|transcript|diff|branch_url|changed_files|logs|log_tail|doctor|prompts|config_get|memory_list|agents_list|risk|costs|org)$"],
+    "appTools": "^mcp__(ccd_pr__(get_status|bind_pr|unbind_pr|set_monitor)|ccd_session__(mark_chapter|dismiss_task)|ccd_turn__(wrap_up|update_plan))$",
+    "leadAppTools": "^mcp__(scheduled-tasks|ccd_session_mgmt|ccd_sidebar)__|^mcp__ccd_session__(start_session|list_start_targets)$|^mcp__ccd_window__open_session_in$|^mcp__ccd_host__reveal_path$|^mcp__keelcrew[-_]local__(open_file|open_in|open_logs|open_session)$",
+    "boardOnlyTools": "^mcp__[\\w-]*keelcrew[\\w-]*__(approve|approve_post|prompt_save|config_set)$",
+    "grantCode": "\\bhelper\\W{1,4}(git|admin)\\.mjs\\b|\\bcore\\W{1,4}grants\\.mjs\\b|\\b(writeGrant|writePostGrant|approvePost)\\b|^(?=[\\s\\S]*\\bhelper\\b)[\\s\\S]*\\bapprove\\s*\\(|\\bgrant\\W{1,8}(ship|post)\\b",
+    "browserTools": "^mcp__(Claude_Browser|claude-in-chrome)__",
+    "deployTools": "^mcp__.+__(triggerBuild|rebuildBuild|replayBuild)$",
+    "browserScriptWrites": ["\\bfetch\\s*\\(", "XMLHttpRequest", "\\.(submit|requestSubmit|click|dispatchEvent)\\s*\\(", "(local|session)Storage\\s*\\.\\s*(set|remove|clear)", "\\bdocument\\.cookie\\b", "\\bsendBeacon\\b", "\\bWebSocket\\b", "\\bwindow\\.open\\b", "\\blocation\\s*(=[^=]|\\.(href\\s*=[^=]|assign|replace|reload))", "\\bimport\\s*\\(", "\\beval\\s*\\(", "\\bnew\\s+Function\\b"],
+    "trustKinds": {
+      "jira": "Jira|Confluence|Atlassian",
+      "deploy": "Jenkins|deploy"
+    },
+    "draftKinds": {
+      "figma": [
+        {"tool": "^mcp__(?:(?!__).)+__use_figma$"},
+        {"tool": "^mcp__(?:(?!__).)*figma(?:(?!__).)*__create_new_file$"},
+        {"tool": "^mcp__[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}__create_new_file$", "input": {"planKey": "^(team|organization)::\\d+$", "editorType": "^(design|figjam)$"}}
+      ]
+    }
+  },
+  "sessions": {
+    "$comment": "Claude Code settings Keelcrew keeps in the Mate folder's .claude/settings.local.json, read by every session that starts there (Mate, engineers, agents, jobs): defaultMode keeps crew sessions from stalling on prompts (never bypassPermissions), and compactWindow is when they auto-compact, in tokens (100000 to 1000000) or \"auto\". The captain changes compactWindow in board Settings. allowTools are app tools that skip auto mode's check there (only ones core/leadsettings.mjs lists as safe); none today: the app refuses a start from anything but the captain's own action in the session, so allowing start_session gains nothing.",
+    "defaultMode": "auto",
+    "compactWindow": 600000,
+    "allowTools": []
+  },
+  "risk": {
+    "$comment": "Risk tier of a ticket's committed diff against its base branch. Each pattern is matched against every changed path (`deleted: true` only against deleted files); a pack adds patterns. Size is lines added plus deleted. A ship approval lasts ttlMinutes for its tier; an unknown tier counts as high.",
+    "patterns": {
+      "high": [
+        {"pattern": "^\\.github/workflows/", "why": "CI workflows"},
+        {"pattern": "(^|/)(Dockerfile[^/]*|docker-compose[^/]*\\.ya?ml)$|(^|/)(helm|charts|terraform|k8s)/", "why": "build and deploy files"}
+      ],
+      "medium": [
+        {"pattern": "(^|/)(package(-lock)?\\.json|yarn\\.lock|pnpm-lock\\.yaml|requirements[^/]*\\.txt|pyproject\\.toml|poetry\\.lock|Pipfile(\\.lock)?|go\\.(mod|sum)|Cargo\\.(toml|lock)|Gemfile(\\.lock)?)$", "why": "dependencies"}
+      ]
+    },
+    "size": {
+      "medium": 400,
+      "high": 1200
+    },
+    "ttlMinutes": {
+      "low": 20160,
+      "medium": 20160,
+      "high": 20160
+    }
+  },
+  "posts": {
+    "$comment": "One-shot outside writes: an approved draft card lets one matching connector or GitHub write through, within this many minutes.",
+    "ttlMinutes": 30
+  },
+  "denials": {
+    "$comment": "A crew session denied this many times in a row, or in total, is paused until the Mate runs `keelctl unpause`. While paused it may only use these tools and message the Mate. A denial that stands in for a prompt (promptMode deny) counts only once the same call has been refused softRetries times in a row, and then counts for all of them.",
+    "pauseAfterConsecutive": 5,
+    "pauseAfterTotal": 40,
+    "softRetries": 3,
+    "allowWhilePaused": ["Read", "Grep", "Glob"]
+  },
+  "memory": {
+    "$comment": "Lesson lifecycle: a candidate becomes active when the captain said it or the Mate promotes it on the captain's OK; candidates unseen this many days retire; active lessons unseen this many days are flagged stale.",
+    "candidateRetireDays": 30,
+    "activeStaleDays": 90
+  },
+  "org": {
+    "$comment": "The company. Seats are concurrent ticket sessions shared by engineers and contractors, a fresh one per ticket. Budgets read the ledger.",
+    "seats": 4,
+    "proactiveMinHitRate": 0.3,
+    "proactiveHitWindow": 10,
+    "proactivePauseDays": 14,
+    "spendAlarmMinTickets": 10,
+    "spendSoftQuantile": 0.75,
+    "spendHardQuantile": 0.95,
+    "spendAlarmContinueFactor": 1.5,
+    "spendWindowSlackMinutes": 60,
+    "bugLinkWindowDays": 30,
+    "phoneGrantMaxAgeHours": 24
+  }
+}

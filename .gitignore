@@ -1,0 +1,17 @@
+node_modules/
+.DS_Store
+*.log
+*.tmp
+board/dist/
+dist/
+.env*
+!.env.example
+*.zip
+coverage/
+**/.claude/settings.local.json
+.claude/worktrees/
+*.pem
+*.key
+*.tgz
+.idea/
+.vscode/
