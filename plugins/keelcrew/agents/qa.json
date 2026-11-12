@@ -1,0 +1,27 @@
+{
+  "id": "qa",
+  "name": "QA agent",
+  "summary": "Tests a deployed ticket against its contract in a browser, expected results first, with API assertions; posts a QA card with evidence and flake notes and sends failures back to the engineer with an exact repro.",
+  "kind": "ticket",
+  "runAs": "session",
+  "skill": "keel-qa",
+  "trigger": "after-deploy",
+  "canShip": false,
+  "defaultEnabled": true,
+  "model": "claude-sonnet-5-5",
+  "effort": "high",
+  "settings": {
+    "maxRounds": { "type": "number", "default": 2, "label": "Failed QA rounds before asking you" },
+    "captureNetwork": { "type": "boolean", "default": true, "label": "Capture API requests and responses for every case" },
+    "preferBrowser": { "type": "string", "default": "builtin", "label": "Browser to try first: builtin or chrome (chrome when a logged-in session is needed)" },
+    "screenshotEachCase": { "type": "boolean", "default": true, "label": "Save a screenshot at each case's verdict and at failures (checkpoints only)" }
+  },
+  "department": "engineering",
+  "reportsTo": "lead",
+  "memberKind": "agent",
+  "policy": "agent",
+  "outputs": [{"id": "qa-verdict", "label": "QA verdict"}],
+  "metrics": ["accepted"],
+  "cards": ["qa", "question"],
+  "proposedModel": {"model": "claude-sonnet-5-5", "effort": "high"}
+}

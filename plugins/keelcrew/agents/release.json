@@ -1,0 +1,21 @@
+{
+  "id": "release",
+  "name": "Release captain",
+  "summary": "Weekly release prep: release notes from merged PRs, a merge-status overview, and, if your team cuts patch tags, cherry-pick tags kept local.",
+  "kind": "scheduled",
+  "runAs": "schedule",
+  "skill": "keel-release",
+  "trigger": "schedule",
+  "canShip": false,
+  "defaultEnabled": false,
+  "schedule": { "cron": "0 10 * * 4", "label": "Thursdays 10:00" },
+  "model": "claude-sonnet-5-5",
+  "effort": "high",
+  "settings": {
+    "releaseNotesPageId": { "type": "string", "default": "", "label": "Confluence page for release notes (empty = draft only)" }
+  },
+  "department": "engineering",
+  "reportsTo": "lead",
+  "memberKind": "agent",
+  "policy": "drafts"
+}

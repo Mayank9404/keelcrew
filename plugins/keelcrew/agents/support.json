@@ -1,0 +1,23 @@
+{
+  "id": "support",
+  "name": "Support",
+  "summary": "Weekdays: reads new customer issues from the source you name (read only), groups duplicates, maps each to its likely code path, and posts a proposal card with a ticket draft and a reply draft. Never sends a reply.",
+  "kind": "scheduled",
+  "runAs": "schedule",
+  "skill": "keel-support",
+  "trigger": "schedule",
+  "canShip": false,
+  "defaultEnabled": false,
+  "schedule": { "cron": "0 10 * * 1-5", "label": "weekdays 10:00" },
+  "settings": {
+    "source": { "type": "string", "default": "", "label": "Where customer issues come from: jira:<project key> or teams:<channel> (empty = nothing is read)" },
+    "maxIssues": { "type": "number", "default": 5, "label": "Most issues posted as cards per run" }
+  },
+  "department": "support",
+  "memberKind": "agent",
+  "policy": "drafts",
+  "outputs": [{"id": "triage", "label": "Triaged issue with ticket and reply drafts"}],
+  "metrics": ["triage-correct", "time-to-triage"],
+  "cards": ["proposal", "info"],
+  "proposedModel": {"model": "claude-sonnet-5-5", "effort": "high"}
+}

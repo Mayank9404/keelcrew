@@ -1,0 +1,23 @@
+{
+  "id": "analyst",
+  "name": "Analyst",
+  "summary": "Answers a data or investigation question with read-only queries, query plans and your logs and metrics tools, and writes a report with the method and numbers.",
+  "kind": "on-demand",
+  "runAs": "session",
+  "skill": "keel-analyst",
+  "trigger": "on-request",
+  "canShip": false,
+  "defaultEnabled": true,
+  "model": "claude-sonnet-5-5",
+  "effort": "high",
+  "settings": {
+    "defaultEnv": { "type": "string", "default": "prod", "label": "Database to query when the question doesn't say: dev, qa or prod" },
+    "maxQuerySeconds": { "type": "number", "default": 45, "label": "Stop retrying a query shape that runs longer than this" },
+    "publishPageOverKB": { "type": "number", "default": 30, "label": "Also publish a private report page when the report is larger than this" }
+  },
+  "department": "product",
+  "reportsTo": "pm",
+  "memberKind": "agent",
+  "policy": "agent",
+  "outputs": [{"id": "report", "label": "Answer with numbers and method"}]
+}

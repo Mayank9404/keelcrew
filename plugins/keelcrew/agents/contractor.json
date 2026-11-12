@@ -1,0 +1,22 @@
+{
+  "id": "contractor",
+  "name": "Contractor",
+  "summary": "Takes one mechanical ticket (tests for existing code, lint or format, renames, docs, dependency bumps without API changes) in its own worktree and ships it as a low-risk draft PR; anything that stops being mechanical goes back to the Mate.",
+  "kind": "ticket",
+  "runAs": "session",
+  "skill": "keel-contractor",
+  "trigger": "ticket-start",
+  "canShip": true,
+  "defaultEnabled": false,
+  "settings": {
+    "mechanicalKinds": { "type": "string", "default": "tests,lint,rename,docs,dep-bump", "label": "Kinds of ticket a contractor takes: tests, lint, rename, docs, dep-bump (comma-separated)" }
+  },
+  "department": "engineering",
+  "reportsTo": "lead",
+  "memberKind": "contractor",
+  "policy": "code",
+  "outputs": [{"id": "pr", "label": "Pull request"}],
+  "metrics": ["cost", "qa-first-pass", "owner-edits"],
+  "cards": [],
+  "proposedModel": {"model": "claude-sonnet-5-5", "effort": "high"}
+}

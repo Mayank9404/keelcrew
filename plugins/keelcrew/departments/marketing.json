@@ -1,0 +1,11 @@
+{
+  "id": "marketing",
+  "name": "Marketing",
+  "summary": "Release notes, changelog and post drafts from shipped work. Drafts only; nothing is published.",
+  "head": "marketing",
+  "order": 3,
+  "colour": "#d0784a",
+  "budgetShare": 0.05,
+  "defaultEnabled": false,
+  "switchable": true
+}

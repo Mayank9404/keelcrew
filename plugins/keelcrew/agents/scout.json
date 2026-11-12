@@ -1,0 +1,23 @@
+{
+  "id": "scout",
+  "name": "Context scout",
+  "summary": "Before the spec: related code paths, recent commits and PRs on them, earlier tickets, owners, in-flight overlap, risks and open questions.",
+  "kind": "ticket",
+  "runAs": "subagent",
+  "skill": "keel-scout",
+  "trigger": "ticket-triage",
+  "canShip": false,
+  "defaultEnabled": true,
+  "model": "claude-sonnet-5-5",
+  "effort": "high",
+  "settings": {
+    "lookbackMonths": { "type": "number", "default": 6, "label": "Months of git history to read on the touched files" },
+    "maxRelatedTickets": { "type": "number", "default": 5, "label": "Earlier tickets to include" },
+    "checkInFlightPrs": { "type": "boolean", "default": true, "label": "Check open PRs and crew branches touching the same files" }
+  },
+  "department": "engineering",
+  "reportsTo": "lead",
+  "memberKind": "agent",
+  "policy": "agent",
+  "proposedModel": {"model": "claude-sonnet-5-5", "effort": "medium"}
+}

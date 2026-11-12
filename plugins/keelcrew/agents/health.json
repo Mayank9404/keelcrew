@@ -1,0 +1,25 @@
+{
+  "id": "health",
+  "name": "Health check",
+  "summary": "Weekday self-check: stuck, silent or paused sessions, sessions lost after an app restart, watches that drifted or missed runs, worktree and board housekeeping. The Mate's panel checks alerts, usage, budgets, disk and keelctl doctor every 2 hours; this run reads what it found and reports to the Mate.",
+  "kind": "scheduled",
+  "runAs": "schedule",
+  "skill": "keel-health",
+  "trigger": "schedule",
+  "canShip": false,
+  "defaultEnabled": false,
+  "schedule": { "cron": "5 13 * * 1-5", "label": "weekdays 13:05" },
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "settings": {
+    "silentMinutes": { "type": "number", "default": 45, "label": "An active engineer with no activity for this long counts as silent" },
+    "usageWarnMargin": { "type": "number", "default": 0.1, "label": "Warn when usage is within this share of the guard" },
+    "minFreeDiskGB": { "type": "number", "default": 10, "label": "Warn when free disk space drops below this" },
+    "qaMaxDays": { "type": "number", "default": 3, "label": "A task in QA longer than this many working days counts as overdue" }
+  },
+  "department": "operations",
+  "reportsTo": "lead",
+  "memberKind": "agent",
+  "policy": "agent",
+  "proposedModel": {"model": "claude-sonnet-5-5", "effort": "medium"}
+}

@@ -1,0 +1,25 @@
+{
+  "id": "learner",
+  "name": "Learner",
+  "summary": "Nightly: turns your chat, card answers, PR comments and edits, and what the crew missed, into candidate lessons; posts changes to the standing orders for your approval.",
+  "kind": "scheduled",
+  "runAs": "schedule",
+  "skill": "keel-learner",
+  "trigger": "schedule",
+  "canShip": false,
+  "defaultEnabled": false,
+  "schedule": { "cron": "0 21 * * 1-5", "label": "weekdays 21:00" },
+  "model": "claude-sonnet-5-5",
+  "effort": "high",
+  "settings": {
+    "minConfidence": { "type": "number", "default": 0.5, "label": "Lowest confidence (0-1) a new lesson needs to be recorded" },
+    "learnFromCommits": { "type": "boolean", "default": true, "label": "Learn style from your own commits" },
+    "pruneWeekday": { "type": "number", "default": 5, "label": "Day of the weekly standing orders tidy-up (0 = Sunday, 5 = Friday)" },
+    "harvestMissedSignals": { "type": "boolean", "default": true, "label": "Learn from what the crew missed: review comments it didn't flag, QA reopens, reverts, rejected cards" }
+  },
+  "department": "operations",
+  "reportsTo": "lead",
+  "memberKind": "agent",
+  "policy": "agent",
+  "proposedModel": {"model": "claude-sonnet-5-5", "effort": "medium"}
+}

@@ -1,0 +1,25 @@
+{
+  "id": "pm",
+  "name": "PM",
+  "summary": "Weekly product memo from product usage data (such as Datadog RUM), the Jira backlog and your goals, with three suggested bets and impact checks on shipped proposals. Proposal cards only when you turn them on. Read only.",
+  "kind": "scheduled",
+  "runAs": "schedule",
+  "skill": "keel-pm",
+  "trigger": "schedule",
+  "canShip": false,
+  "defaultEnabled": false,
+  "schedule": { "cron": "30 9 * * 1", "label": "Mondays 9:30" },
+  "settings": {
+    "proposals": { "type": "boolean", "default": false, "label": "Also post proposal cards (off: the memo only)" },
+    "maxProposals": { "type": "number", "default": 2, "label": "Most open PM proposals at a time" },
+    "impactCheckDays": { "type": "number", "default": 14, "label": "Days after a proposal ships before its impact is measured" }
+  },
+  "department": "product",
+  "memberKind": "agent",
+  "policy": "reader",
+  "reads": ["datadog", "jira"],
+  "outputs": [{"id": "memo", "label": "Weekly product memo"}, {"id": "proposal", "label": "Product proposal"}],
+  "metrics": ["accepted", "impact", "hit-rate"],
+  "cards": ["info", "proposal"],
+  "proposedModel": {"model": "claude-opus-5-5", "effort": "high"}
+}

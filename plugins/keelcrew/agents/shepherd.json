@@ -1,0 +1,23 @@
+{
+  "id": "shepherd",
+  "name": "PR shepherd",
+  "summary": "Watches crew PRs for waiting reviews, failing CI, conflicts and new comments; wakes the engineer with an exact to-do and sums up threads for you.",
+  "kind": "scheduled",
+  "runAs": "schedule",
+  "skill": "keel-shepherd",
+  "trigger": "schedule",
+  "canShip": false,
+  "defaultEnabled": false,
+  "schedule": { "cron": "15 10-18/2 * * 1-5", "label": "every 2 h, weekdays 10:15-18:15" },
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "settings": {
+    "nudgeAfterHours": { "type": "number", "default": 24, "label": "Flag a review request after it waits this many hours" },
+    "wakeEngineers": { "type": "boolean", "default": true, "label": "Wake the engineer on CI failures, conflicts and new review comments" },
+    "includeTeammatePrs": { "type": "boolean", "default": true, "label": "Suggest reviews for teammates' PRs waiting on you" }
+  },
+  "department": "engineering",
+  "reportsTo": "lead",
+  "memberKind": "agent",
+  "policy": "agent"
+}

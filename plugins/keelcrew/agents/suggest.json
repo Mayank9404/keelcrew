@@ -1,0 +1,31 @@
+{
+  "id": "suggest",
+  "name": "Suggested tasks",
+  "summary": "Twice a weekday: scans the repos for security issues, production errors, slow endpoints, CI and test gaps, code health and dependency risk, and proposes fixes and bigger changes with evidence and a confidence. The Mate may start small ones by itself when seats are free; the launch card still waits for you.",
+  "kind": "scheduled",
+  "runAs": "schedule",
+  "skill": "keel-suggest",
+  "trigger": "schedule",
+  "canShip": false,
+  "defaultEnabled": false,
+  "schedule": { "cron": "0 9,18 * * 1-5", "label": "weekdays 9:00 and 18:00" },
+  "model": "claude-sonnet-5-5",
+  "effort": "high",
+  "settings": {
+    "onlyMine": { "type": "boolean", "default": true, "label": "Only code I mainly write (when the team pack splits findings by author); off: every finding, as colleagues may get too" },
+    "repos": { "type": "string", "default": "", "label": "Repos to scan, by their names in the team pack (comma-separated; empty: all)" },
+    "sources": { "type": "string", "default": "security,errors,perf,ci,tests,health,deps,backlog", "label": "What to look at: security, errors, perf, ci, tests, health, deps, backlog (comma-separated)" },
+    "maxProposals": { "type": "number", "default": 5, "label": "Most proposals per run" },
+    "minConfidence": { "type": "number", "default": 0.6, "label": "Lowest confidence (0-1) a proposal needs" },
+    "lookbackDays": { "type": "number", "default": 7, "label": "Days of errors, commits and CI runs to read" },
+    "autoStart": { "type": "boolean", "default": false, "label": "Let the Mate start small, confident fixes by itself when seats are free (never security ones; the launch card still waits for you)" },
+    "autoStartPerDay": { "type": "number", "default": 3, "label": "Most fixes the Mate starts by itself per day" },
+    "autoStartUsagePct": { "type": "number", "default": 15, "label": "Most of the weekly usage bar (%) those fixes may use" }
+  },
+  "department": "engineering",
+  "reportsTo": "lead",
+  "memberKind": "agent",
+  "policy": "agent",
+  "metrics": ["hit-rate"],
+  "cards": ["proposal"]
+}

@@ -1,0 +1,22 @@
+{
+  "id": "chief-of-staff",
+  "name": "Chief of Staff",
+  "summary": "Each weekday morning: ranks your open cards by urgency, goal weight, age and cost of waiting, holds the ones past your daily cap until tomorrow, and posts a Today note with the top three. Fridays add progress per goal. Never answers a card.",
+  "kind": "scheduled",
+  "runAs": "schedule",
+  "skill": "keel-chief-of-staff",
+  "trigger": "schedule",
+  "canShip": false,
+  "defaultEnabled": false,
+  "schedule": { "cron": "45 8 * * 1-5", "label": "weekdays 8:45 (goals on Fridays)" },
+  "settings": {
+    "dailyCardCap": { "type": "number", "default": 8, "label": "Most cards shown to you per day; the rest wait until tomorrow (ship and urgent cards are never held)" }
+  },
+  "department": "ceo",
+  "memberKind": "agent",
+  "policy": "reader",
+  "outputs": [{"id": "today", "label": "Today note and inbox order"}],
+  "metrics": ["edited"],
+  "cards": ["info"],
+  "proposedModel": {"model": "claude-sonnet-5-5", "effort": "high"}
+}

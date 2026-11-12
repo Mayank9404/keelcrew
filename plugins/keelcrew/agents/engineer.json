@@ -1,0 +1,25 @@
+{
+  "id": "engineer",
+  "name": "Engineer",
+  "summary": "Owns one ticket end to end in its own worktree: root cause and plan, build, validate against the contract, review, launch card, PR.",
+  "kind": "ticket",
+  "runAs": "session",
+  "skill": "keel-engineer",
+  "trigger": "ticket-start",
+  "canShip": true,
+  "defaultEnabled": true,
+  "model": "claude-sonnet-5-5",
+  "settings": {
+    "planReviewFrom": { "type": "string", "default": "complex", "label": "Mate reviews the plan before building from this difficulty up (simple, moderate, complex, critical)" },
+    "scopeLimitFiles": { "type": "number", "default": 15, "label": "Plans touching more files than this get cut down before building" },
+    "maxFixRounds": { "type": "number", "default": 3, "label": "Fix rounds on one review before the engineer stops and asks the Mate (the reviewer's own limit also applies)" }
+  },
+  "department": "engineering",
+  "reportsTo": "lead",
+  "memberKind": "engineer",
+  "policy": "code",
+  "outputs": [{"id": "pr", "label": "Pull request"}],
+  "metrics": ["bugs", "reverts", "qa-first-pass", "owner-edits", "cost", "speed", "avoidable-questions"],
+  "cards": ["question", "ship"],
+  "proposedModel": {"byDifficulty": {"simple": {"model": "claude-sonnet-5-5", "effort": "xhigh"}, "moderate": {"model": "claude-opus-5-5", "effort": "high"}, "complex": {"model": "claude-opus-5-5", "effort": "xhigh"}, "critical": {"model": "claude-opus-5-5", "effort": "xhigh"}}}
+}

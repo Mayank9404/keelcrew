@@ -1,0 +1,21 @@
+{
+  "id": "reviewer",
+  "name": "Reviewer",
+  "summary": "Fresh-context adversarial review of the branch diff against the ticket's contract before the launch card: a confidence per finding, a diff walkthrough for you, and a receipt bound to HEAD. Also drafts reviews of teammates' PRs on request.",
+  "kind": "ticket",
+  "runAs": "subagent",
+  "skill": "keel-reviewer",
+  "trigger": "before-ship",
+  "defaultEnabled": true,
+  "model": "claude-sonnet-5-5",
+  "effort": "high",
+  "settings": {
+    "blockAtConfidence": { "type": "number", "default": 7, "label": "Findings at or above this confidence (1-10) must be fixed or argued" },
+    "maxRounds": { "type": "number", "default": 3, "label": "Review rounds before reporting BLOCKED" },
+    "useTeamChecks": { "type": "boolean", "default": true, "label": "Use the team pack's review checks (for example, a code-review skill's families)" }
+  },
+  "department": "engineering",
+  "reportsTo": "lead",
+  "memberKind": "agent",
+  "policy": "agent"
+}

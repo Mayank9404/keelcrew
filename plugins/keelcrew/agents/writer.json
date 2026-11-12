@@ -1,0 +1,24 @@
+{
+  "id": "writer",
+  "name": "Writer",
+  "summary": "Drafts docs, Confluence pages, release notes, design docs, Jira comments, and email and Teams replies; nothing is posted or sent without your approval.",
+  "kind": "on-demand",
+  "runAs": "session",
+  "skill": "keel-writer",
+  "trigger": "on-request",
+  "canShip": false,
+  "defaultEnabled": true,
+  "model": "claude-sonnet-5-5",
+  "effort": "high",
+  "settings": {
+    "confluenceSpace": { "type": "string", "default": "", "label": "Confluence space key for new pages (empty = the brief must name one)" },
+    "confluenceParentId": { "type": "string", "default": "", "label": "Parent page id for new pages (empty = space root)" },
+    "postAfterApproval": { "type": "boolean", "default": true, "label": "Post approved Jira and Confluence drafts itself (off = you post them)" }
+  },
+  "department": "product",
+  "reportsTo": "pm",
+  "memberKind": "agent",
+  "policy": "drafts",
+  "outputs": [{"id": "doc", "label": "Document draft"}],
+  "metrics": ["accepted", "edited"]
+}

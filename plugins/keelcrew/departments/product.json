@@ -1,0 +1,11 @@
+{
+  "id": "product",
+  "name": "Product & Design",
+  "summary": "PM (CPO), designer and analyst: product memo and proposals, mockups, data answers.",
+  "head": "pm",
+  "order": 2,
+  "colour": "#8a5cc7",
+  "budgetShare": 0.15,
+  "defaultEnabled": true,
+  "switchable": true
+}

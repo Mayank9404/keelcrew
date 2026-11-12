@@ -1,0 +1,11 @@
+{
+  "id": "operations",
+  "name": "Operations",
+  "summary": "The crew's own upkeep: Jira scan, health, learner, briefs and comms. Always on.",
+  "head": "briefs",
+  "order": 5,
+  "colour": "#7a8494",
+  "budgetShare": 0.1,
+  "defaultEnabled": true,
+  "switchable": false
+}

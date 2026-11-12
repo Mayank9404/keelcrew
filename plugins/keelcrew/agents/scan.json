@@ -1,0 +1,18 @@
+{
+  "id": "scan",
+  "name": "Jira scan",
+  "summary": "The Mate's panel scans Jira for your tickets every 30 minutes on working days and wakes the Mate only for new tickets and status changes; the Mate brings the board up to date.",
+  "kind": "scheduled",
+  "runAs": "schedule",
+  "skill": "keel-scan",
+  "trigger": "schedule",
+  "defaultEnabled": true,
+  "settings": {
+    "flagComments": { "type": "boolean", "default": true, "label": "Flag new Jira comments from others on crew tickets" },
+    "maxPages": { "type": "number", "default": 5, "label": "Jira result pages to read per scan" }
+  },
+  "department": "operations",
+  "reportsTo": "lead",
+  "memberKind": "agent",
+  "policy": "agent"
+}

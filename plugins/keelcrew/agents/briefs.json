@@ -1,0 +1,26 @@
+{
+  "id": "briefs",
+  "name": "Briefs",
+  "summary": "Morning brief, standup draft and the Friday retro with week-on-week changes.",
+  "kind": "scheduled",
+  "runAs": "schedule",
+  "skill": "keel-brief",
+  "trigger": "schedule",
+  "defaultEnabled": false,
+  "schedule": [
+    { "cron": "30 9 * * 1-5", "label": "morning brief and standup draft, weekdays 9:30" },
+    { "cron": "30 17 * * 5", "label": "retro, Fridays 17:30" }
+  ],
+  "model": "claude-sonnet-5-5",
+  "effort": "medium",
+  "settings": {
+    "pushMorningBrief": { "type": "boolean", "default": false, "label": "Send a push notification with the morning brief" },
+    "morningMaxLines": { "type": "number", "default": 8, "label": "Most lines in the morning brief" },
+    "retroDeltas": { "type": "boolean", "default": true, "label": "Compare the retro with last week and score last week's recommendations" }
+  },
+  "department": "operations",
+  "reportsTo": "lead",
+  "memberKind": "agent",
+  "policy": "agent",
+  "proposedModel": {"model": "claude-sonnet-5-5", "effort": "medium"}
+}

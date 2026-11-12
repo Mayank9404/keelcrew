@@ -1,0 +1,11 @@
+{
+  "id": "engineering",
+  "name": "Engineering",
+  "summary": "The Mate, engineers, contractors, QA, scout, suggestions and release.",
+  "head": "cto",
+  "order": 1,
+  "colour": "#4a7bd0",
+  "budgetShare": 0.6,
+  "defaultEnabled": true,
+  "switchable": true
+}

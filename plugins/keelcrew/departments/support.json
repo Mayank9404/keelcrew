@@ -1,0 +1,11 @@
+{
+  "id": "support",
+  "name": "Support",
+  "summary": "Triages customer issues into ticket drafts and drafts replies. Drafts only; nothing is sent.",
+  "head": "support",
+  "order": 4,
+  "colour": "#3f9e7a",
+  "budgetShare": 0.05,
+  "defaultEnabled": false,
+  "switchable": true
+}

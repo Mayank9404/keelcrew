@@ -1,0 +1,11 @@
+{
+  "id": "ceo",
+  "name": "CEO office",
+  "summary": "The captain's office: the Chief of Staff orders the inbox, writes the brief and retro, and keeps the goals. Off: cards come straight to the captain.",
+  "head": "chief-of-staff",
+  "order": 0,
+  "colour": "#b08d57",
+  "budgetShare": 0.05,
+  "defaultEnabled": false,
+  "switchable": true
+}
