@@ -1,0 +1,58 @@
+{
+  "$comment": "An example team pack for a made-up company, Brinewick. A pack holds everything Keelcrew needs to know about how one team builds software; the core stays generic. It shows the format and backs the tests; setup never offers it. Make your own with keelctl pack init <team> (setup does), then extend it. The skill names under repos and agents (pre-pr-checks, smoke-test, code-review) stand for a team's own skills; Keelcrew doesn't ship them.",
+  "name": "brinewick",
+  "title": "Brinewick engineering (example)",
+  "timezone": "UTC",
+  "jira": {
+    "site": "https://example.atlassian.net",
+    "jql": "assignee = currentUser() AND statusCategory != Done ORDER BY updated DESC",
+    "backendField": "Developer",
+    "qaStatuses": ["In QA"]
+  },
+  "repos": {
+    "brinewick-api": {
+      "baseBranch": "develop",
+      "prGateSkill": "pre-pr-checks",
+      "lint": "ruff check <changed .py files>",
+      "notes": "Read the repo's CLAUDE.md before changing code. Never apply database migrations without the captain."
+    },
+    "brinewick-web": {
+      "baseBranch": "develop",
+      "lint": "npx eslint <changed files>",
+      "notes": "Run npm test before shipping."
+    }
+  },
+  "proposals": {
+    "$comment": "When colleagues scan the same repos, the suggest and CTO agents keep a finding only when its main file's top recent author is the captain, so each finding lands on one board.",
+    "mainAuthorOnly": true
+  },
+  "policy": {
+    "protectedBranches": ["develop", "release"],
+    "readOnlyServers": ["^mcp__brinewick-db-(qa|prod)__"],
+    "denyBash": [
+      { "pattern": "\\bgh\\s+(pr|issue|api)\\b.*\\bship-it\\b", "flags": "i", "why": "the ship-it label starts a deploy" },
+      { "pattern": "\\balembic\\s+(upgrade|downgrade|stamp)\\b", "why": "applying migrations is never allowed" },
+      { "pattern": "\\bmake\\s+(reset-db|drop-db)\\b", "why": "destructive make targets are never allowed" }
+    ]
+  },
+  "risk": {
+    "patterns": {
+      "high": [
+        { "pattern": "(^|/)migrations/[^/]+\\.py$", "why": "database migrations" },
+        { "pattern": "(^|/)settings(/|\\.py$)", "why": "settings" },
+        { "pattern": "(^|/)(auth|permissions?)(/|\\.py$)", "why": "auth and permissions" }
+      ],
+      "medium": [
+        { "pattern": "(^|/)sql/[^/]+\\.sql$", "why": "raw SQL files" },
+        { "pattern": ".", "deleted": true, "why": "deleted files" }
+      ]
+    }
+  },
+  "agents": {
+    "engineer": { "skills": ["pre-pr-checks before any PR"] },
+    "qa": { "skills": ["smoke-test"], "notes": "QA runs against https://qa.brinewick.test with the test accounts." },
+    "reviewer": { "skills": ["code-review"] },
+    "analyst": { "notes": "Prod and qa are read-only: SELECTs and query plans only, through the brinewick-db MCP servers." }
+  },
+  "ide": { "editor": "vscode", "terminal": "terminal" }
+}
