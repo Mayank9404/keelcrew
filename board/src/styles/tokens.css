@@ -1,0 +1,145 @@
+/*
+ * Keelcrew tokens, defined once. The look comes from a nautical chart: a pale-blue ground for open water, white paper
+ * for documents, buff for the place you sign, and magenta (the chart's colour for notes and warnings) for whatever is
+ * waiting on you. Colour is kept for state: waiting magenta, underway teal, shown ink-blue, failed red, QA indigo.
+ * Type: Literata for titles, Archivo for the interface, JetBrains Mono for commits, paths and code.
+ * Spacing runs 4-8-12-16-24-32. Corners are square; depth is a flat offset shadow, never a blur.
+ * Three themes, named for the steps a ship's chart display dims through: Day (the default), Dusk and Night. The page
+ * carries the one in use as `data-chart` on the root (lib/theme.ts); with no attribute it is Day. Every theme sets the
+ * same colour tokens, and text on a filled state colour uses --surface or --on-ink, so it flips with the theme.
+ */
+:root {
+  /* neutrals */
+  --bg: #d3e6f1;
+  --surface: #ffffff;
+  --surface-2: #eef5f9;
+  --surface-3: #dceaf2;
+  --line: #c5d6e0;
+  --line-strong: #8fa9ba;
+  --fg: #17181c;
+  --fg-2: #2b333b;
+  --muted: #3f4a54;
+  --faint: #52616d;
+  --ink: #17181c;
+  --on-ink: #ffffff;
+  --link: #1b4f72;
+  --focus: #9c1f74;
+  /* the place you sign */
+  --buff: #f4e6bc;
+  --buff-line: #b9a66a;
+  --buff-ink: #3a3320;
+  /* state */
+  --work: #24707f;
+  --you: #9c1f74;
+  --you-wash: #fbeff7;
+  --block: #b42318;
+  --ok: #1b4f72;
+  --qa: #5a4fb0;
+  --warn: #8a6400;
+  --agent: #6e6238;
+  --neutral: #3f4a54;
+  /* code */
+  --code-bg: #14222e;
+  --code-fg: #dce7ee;
+  --code-dim: #8fa3b3;
+  --code-add-bg: rgba(108, 192, 142, 0.14);
+  --code-add-fg: #b9e3c7;
+  --code-del-bg: rgba(240, 106, 82, 0.14);
+  --code-del-fg: #f6c2b6;
+  /* type */
+  --font-ui: "Archivo", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Literata", Georgia, "Times New Roman", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --fs-xs: 12px;
+  --fs-sm: 13px;
+  --fs-md: 15px;
+  --fs-lg: 17px;
+  --fs-xl: 21px;
+  --fs-2xl: 32px;
+  /* space, shape, depth */
+  --s1: 4px;
+  --s2: 8px;
+  --s3: 12px;
+  --s4: 16px;
+  --s5: 24px;
+  --s6: 32px;
+  --r-sm: 0px;
+  --r-md: 0px;
+  --r-lg: 0px;
+  --e1: none;
+  --e2: 4px 4px 0 #b4cedd;
+  --e3: 6px 6px 0 #b4cedd;
+  --scrim: rgba(23, 24, 28, 0.34);
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --t: 140ms;
+  --chat-w: clamp(300px, 32vw, 380px);
+  color-scheme: light;
+}
+
+/* Dusk: slate-blue water and paper, light ink. The place you sign dims to a dark buff so the same text tokens read on it. */
+:root[data-chart="dusk"] {
+  --bg: #2e4558;
+  --surface: #3b566b;
+  --surface-2: #375267;
+  --surface-3: #334c60;
+  --line: #4d6a80;
+  --line-strong: #7f9db2;
+  --fg: #f3f7fa;
+  --fg-2: #e3ecf2;
+  --muted: #d3e0ea;
+  --faint: #c2d2de;
+  --ink: #f3f7fa;
+  --on-ink: #14212b;
+  --link: #b7def8;
+  --focus: #ffb7e3;
+  --buff: #574b28;
+  --buff-line: #a08e50;
+  --buff-ink: #f4e6bc;
+  --work: #9be5ec;
+  --you: #ffb7e3;
+  --you-wash: #4a3f5c;
+  --block: #ffc0b5;
+  --ok: #b7def8;
+  --qa: #d6d0ff;
+  --warn: #f2d48a;
+  --agent: #e2d6a8;
+  --neutral: #d3e0ea;
+  --e2: 4px 4px 0 #1f3242;
+  --e3: 6px 6px 0 #1f3242;
+  --scrim: rgba(8, 14, 20, 0.5);
+  color-scheme: dark;
+}
+
+/* Night: deep navy, a dimmed buff panel and a softer magenta. */
+:root[data-chart="night"] {
+  --bg: #08141f;
+  --surface: #0f2231;
+  --surface-2: #0d1e2c;
+  --surface-3: #0b1a27;
+  --line: #213a4e;
+  --line-strong: #3c5c74;
+  --fg: #e4edf3;
+  --fg-2: #cfdbe4;
+  --muted: #a4b7c6;
+  --faint: #93a8b8;
+  --ink: #e4edf3;
+  --on-ink: #08141f;
+  --link: #8cc4ea;
+  --focus: #f58bcb;
+  --buff: #3b331c;
+  --buff-line: #7a6a35;
+  --buff-ink: #f4e6bc;
+  --work: #62c6d2;
+  --you: #f58bcb;
+  --you-wash: #2b1830;
+  --block: #ff9484;
+  --ok: #8cc4ea;
+  --qa: #b9aeff;
+  --warn: #e6c15c;
+  --agent: #cfc08a;
+  --neutral: #a4b7c6;
+  --e2: 4px 4px 0 #030a10;
+  --e3: 6px 6px 0 #030a10;
+  --scrim: rgba(0, 0, 0, 0.55);
+  color-scheme: dark;
+}

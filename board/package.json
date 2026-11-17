@@ -1,0 +1,32 @@
+{
+  "name": "keelcrew-board",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "description": "The Keelcrew board: Keelcrew's UI, published as a private claude.ai artifact.",
+  "type": "module",
+  "scripts": {
+    "build": "vite build && node scripts/page.mjs",
+    "typecheck": "tsc -p tsconfig.json && tsc -p tsconfig.test.json && tsc -p tsconfig.node.json",
+    "test": "npm run typecheck && vitest run",
+    "dev:fixture": "vite build --config dev/vite.config.ts && node dev/page.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "three": "0.186.0"
+  },
+  "devDependencies": {
+    "@types/node": "20.19.9",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@types/three": "0.186.0",
+    "@vitejs/plugin-react": "6.1.1",
+    "typescript": "5.9.3",
+    "vite": "8.3.1",
+    "vitest": "4.1.11"
+  }
+}
