@@ -1,0 +1,49 @@
+{
+  "db": {
+    "rules": [
+      {
+        "path": "settings",
+        "write": "admin"
+      },
+      {
+        "path": "inbox",
+        "write": "owner"
+      }
+    ]
+  },
+  "mcp": {
+    "servers": [
+      {
+        "server": "host:keelcrew-local",
+        "tools": [
+          "ping",
+          "crew_state",
+          "session_events",
+          "transcript",
+          "diff",
+          "branch_url",
+          "changed_files",
+          "open_in",
+          "open_session",
+          "open_file",
+          "logs",
+          "log_tail",
+          "open_logs",
+          "doctor",
+          "prompts",
+          "prompt_save",
+          "config_get",
+          "config_set",
+          "approve",
+          "approve_post",
+          "memory_list",
+          "agents_list",
+          "risk",
+          "costs",
+          "org"
+        ]
+      }
+    ]
+  },
+  "user": {}
+}

@@ -1,0 +1,1 @@
+var e=`Read-only: only the captain of this Keelcrew board can make changes here.`;function t({hasDb:t,isOwner:n}){return t?n===!0?{canWrite:!0,reason:null}:{canWrite:!1,reason:e}:{canWrite:!1,reason:`Open the Keelcrew board in Claude to see and change it.`}}export{e as READ_ONLY_NOTE,t as writeAccess};

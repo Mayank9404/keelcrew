@@ -1,0 +1,1 @@
+var e=`product`,t=`Product & Design`,n=`PM (CPO), designer and analyst: product memo and proposals, mockups, data answers.`,r=`#8a5cc7`,i=.15,a={id:e,name:t,summary:n,head:`pm`,order:2,colour:r,budgetShare:i,defaultEnabled:!0,switchable:!0};export{i as budgetShare,r as colour,a as default,e as id,t as name,n as summary};

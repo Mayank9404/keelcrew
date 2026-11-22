@@ -1,0 +1,1 @@
+var e=`support`,t=`Support`,n=`Triages customer issues into ticket drafts and drafts replies. Drafts only; nothing is sent.`,r=`support`,i=`#3f9e7a`,a=.05,o={id:e,name:t,summary:n,head:r,order:4,colour:i,budgetShare:a,defaultEnabled:!1,switchable:!0};export{a as budgetShare,i as colour,o as default,r as head,e as id,t as name,n as summary};

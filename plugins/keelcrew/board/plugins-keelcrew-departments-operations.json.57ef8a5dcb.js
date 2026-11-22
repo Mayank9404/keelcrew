@@ -1,0 +1,1 @@
+var e=`operations`,t=`Operations`,n=`The crew's own upkeep: Jira scan, health, learner, briefs and comms. Always on.`,r=`briefs`,i=`#7a8494`,a=.1,o={id:e,name:t,summary:n,head:r,order:5,colour:i,budgetShare:a,defaultEnabled:!0,switchable:!1};export{a as budgetShare,i as colour,o as default,r as head,e as id,t as name,n as summary};

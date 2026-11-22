@@ -1,0 +1,1 @@
+var e=e=>/^T-\d+$/.test(e),t=t=>/^[A-Z][A-Z0-9]+-\d+$/.test(t)&&!e(t),n=t=>e(t)?t:t.replace(/^[A-Za-z][A-Za-z0-9]*-/,`#`);function r(t,n){return n===`jira`?`ticket`:n===`user`||n===`board`||e(t)?`adhoc`:`ticket`}export{t as isJiraKey,e as isOwnerTaskKey,n as shortKey,r as taskKindOf};

@@ -1,0 +1,1 @@
+var e=e=>new Promise(t=>setTimeout(t,e));function t({run:e,everyMs:t,hidden:n}){let r=!1,i=()=>{!r&&!n()&&e()};i();let a=setInterval(i,t);return{wake:i,stop(){r=!0,clearInterval(a)}}}export{e as sleep,t as startPoll};

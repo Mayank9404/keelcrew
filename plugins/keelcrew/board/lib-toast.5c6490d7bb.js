@@ -1,0 +1,1 @@
+import{createStore as e}from"crew/lib-createStore";var t=e([]),n=0;function r(e,r=`info`){let a=++n;t.set(t=>[...t.slice(-3),{id:a,text:e,level:r}]);let o=r===`error`?7e3:r===`warn`?5e3:3200;window.setTimeout(()=>i(a),o)}function i(e){t.set(t=>t.some(t=>t.id===e)?t.filter(t=>t.id!==e):t)}export{i as dismissToast,r as toast,t as toastStore};

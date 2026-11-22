@@ -1,0 +1,1 @@
+import{useSyncExternalStore as e}from"react";function t(e){let t=e,n=new Set;return{get:()=>t,set(e){let r=typeof e==`function`?e(t):e;if(!Object.is(r,t)){t=r;for(let e of[...n])e()}},subscribe(e){return n.add(e),()=>{n.delete(e)}}}}function n(t){return e(t.subscribe,t.get,t.get)}export{t as createStore,n as useStore};

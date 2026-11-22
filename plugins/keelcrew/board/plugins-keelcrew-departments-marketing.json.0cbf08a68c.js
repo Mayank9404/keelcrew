@@ -1,0 +1,1 @@
+var e=`marketing`,t=`Marketing`,n=`Release notes, changelog and post drafts from shipped work. Drafts only; nothing is published.`,r=`marketing`,i=`#d0784a`,a=.05,o={id:e,name:t,summary:n,head:r,order:3,colour:i,budgetShare:a,defaultEnabled:!1,switchable:!0};export{a as budgetShare,i as colour,o as default,r as head,e as id,t as name,n as summary};

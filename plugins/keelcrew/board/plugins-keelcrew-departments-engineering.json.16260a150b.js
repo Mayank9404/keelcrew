@@ -1,0 +1,1 @@
+var e=`engineering`,t=`Engineering`,n=`The Mate, engineers, contractors, QA, scout, suggestions and release.`,r=`#4a7bd0`,i=.6,a={id:e,name:t,summary:n,head:`cto`,order:1,colour:r,budgetShare:i,defaultEnabled:!0,switchable:!0};export{i as budgetShare,r as colour,a as default,e as id,t as name,n as summary};
