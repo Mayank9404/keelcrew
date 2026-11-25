@@ -1,0 +1,21 @@
+name: Feature request
+description: An idea for the crew, the board or the rules.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What you're trying to do
+      description: The work or the moment where Keelcrew falls short today.
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: What would help
+      description: How you'd like it to work. A new agent, a board change, a rule, a setting.
+  - type: textarea
+    id: context
+    attributes:
+      label: Anything else
+      description: Your setup (Jira or the board, team size, connectors), or examples from other tools.

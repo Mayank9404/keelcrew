@@ -1,0 +1,47 @@
+name: Bug report
+description: Something in Keelcrew didn't work as it should.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. If the bug lets a crew session get past the policy hook or the pre-push hook, please report it privately instead: **Security → Report a vulnerability**.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you did, what you expected, and what Keelcrew did instead.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: How to reproduce
+      description: The steps, the command you ran, or what you said to the Mate.
+  - type: textarea
+    id: doctor
+    attributes:
+      label: keelctl doctor output
+      description: Run `~/.keelcrew/bin/keelctl doctor` and paste the result. Remove anything private (names, repo paths, ticket keys) first.
+      render: text
+  - type: input
+    id: versions
+    attributes:
+      label: Versions
+      description: Keelcrew version (`claude plugin list` shows it), `claude --version`, and macOS version.
+      placeholder: Keelcrew 0.2.0, Claude Code 2.1.330, macOS 26.1
+    validations:
+      required: true
+  - type: dropdown
+    id: where
+    attributes:
+      label: Where it went wrong
+      options:
+        - Install or setup
+        - The Mate
+        - An engineer or another agent
+        - Scheduled watches
+        - The Keelcrew board
+        - The Harbour light look or panel
+        - Policy or push rules
+        - Something else

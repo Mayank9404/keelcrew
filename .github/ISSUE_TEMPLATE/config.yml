@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Report a security problem
+    url: https://github.com/Mayank9404/keelcrew/security/advisories/new
+    about: A way past the policy or push rules, or anything else security related. Reported privately.
+  - name: Questions and ideas
+    url: https://github.com/Mayank9404/keelcrew/discussions
+    about: Ask how something works or share how you use Keelcrew.

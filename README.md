@@ -3,6 +3,12 @@
 **A crew of Claude Code sessions that works your tickets while you keep the helm.**
 
 <p align="center"><a href="#get-started"><img src="https://img.shields.io/badge/Install-one%20command-1f6feb?style=for-the-badge" alt="Install: one command"></a></p>
+<p align="center">
+  <a href="https://github.com/Mayank9404/keelcrew/releases"><img src="https://img.shields.io/github/v/release/Mayank9404/keelcrew?label=release" alt="Latest release"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-blue" alt="License: Apache-2.0"></a>
+  <img src="https://img.shields.io/badge/platform-macOS-lightgrey" alt="Platform: macOS">
+  <a href="https://code.claude.com/docs/en/plugins"><img src="https://img.shields.io/badge/Claude%20Code-plugin-5a4fcf" alt="A Claude Code plugin"></a>
+</p>
 
 <p align="center">
   <img src="docs/media/harbour-light.gif" alt="A recreation of the Mate's session in the Claude app, animated: its chat with a launch card, a crew card and a refused push, over a night harbour with today's watches, the crew moored at a jetty and a lighthouse sweeping its beam">
@@ -10,7 +16,7 @@
 
 Keelcrew is a Claude Code plugin for developers on a Mac who work from Jira or a task list. One Claude Code session, the **Mate**, runs the others: it gives each ticket an engineer session in its own git worktree, with a reviewer and QA behind it, and shows the work on your own private **Keelcrew board**.
 
-Messages and comments wait for your OK. By default engineers push their branch and open their own PR; switch shipping to card mode and a PR waits for your signature.
+By default engineers push their branch and open their own PR; switch shipping to card mode and a ready PR waits for your signature. Agents that draft mail, chat replies, docs or release notes post only after you approve.
 
 ## Why Keelcrew
 
@@ -93,6 +99,7 @@ The screens above use demo data. The Harbour light image is drawn by the theme's
 - [The crew](docs/crew.md): every agent, how the Mate learns, and the parts.
 - [Architecture](docs/architecture.md): the contract every part is built to.
 - [Contributing](CONTRIBUTING.md): run it from a checkout, test, release.
+- [Changelog](CHANGELOG.md) and [Security](SECURITY.md): what changed, and how to report a problem.
 
 Licensed under Apache-2.0. See [LICENSE](LICENSE) and [NOTICE](NOTICE).
 

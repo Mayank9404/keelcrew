@@ -1,5 +1,7 @@
 # Contributing
 
+Everyone taking part follows the [Code of Conduct](CODE_OF_CONDUCT.md). Found a way past the policy or push rules? Report it privately, as [SECURITY.md](SECURITY.md) says.
+
 Read [docs/architecture.md](docs/architecture.md) before changing anything: it is the contract every part is built to. [docs/agents.md](docs/agents.md) explains how to add an agent.
 
 ## Run it from a checkout

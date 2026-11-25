@@ -9,7 +9,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
-const PATHS = ['.claude-plugin', 'plugins', 'docs', 'README.md', 'CONTRIBUTING.md', 'LICENSE', 'NOTICE'];
+const PATHS = ['.claude-plugin', 'plugins', 'docs', 'README.md', 'CHANGELOG.md', 'CONTRIBUTING.md', 'SECURITY.md', 'LICENSE', 'NOTICE'];
 const LEFT_OUT = [':(exclude)plugins/*/tests', ':(exclude)plugins/*.test.*', ':(exclude)docs/media'];
 
 const git = (/** @type {string[]} */ ...args) => execFileSync('git', ['-C', root, ...args], { encoding: 'utf8' }).trim();
