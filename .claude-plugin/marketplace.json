@@ -8,7 +8,7 @@
     {
       "name": "keelcrew",
       "source": "./plugins/keelcrew",
-      "license": "MIT",
+      "license": "Apache-2.0",
       "description": "A crew of Claude Code sessions inside the Claude app: a Mate (first mate) that learns your style, switchable agents (engineer, QA, reviewer, analyst, writer and more), a private Keelcrew board, team packs, fixed rules so merges and posts wait for your OK, and a panel that wakes the Mate when you act on the board."
     }
   ]

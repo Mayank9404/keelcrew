@@ -80,6 +80,6 @@ In that session, pick the folder that holds your repos and press Enter. Answer i
 - [Architecture](docs/architecture.md): the contract every part is built to.
 - [Contributing](CONTRIBUTING.md): run it from a checkout, test, release.
 
-MIT licensed. See [LICENSE](LICENSE).
+Licensed under Apache-2.0. See [LICENSE](LICENSE) and [NOTICE](NOTICE).
 
 Keelcrew is an independent project, not made or endorsed by Anthropic. Claude and Claude Code are trademarks of Anthropic.

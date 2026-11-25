@@ -3,7 +3,7 @@
   "name": "keelcrew",
   "version": "0.1.5",
   "description": "A crew of Claude Code sessions inside the Claude app: a Mate that learns how you work and staffs tickets and tasks with switchable agents, a private Keelcrew board, team packs, fixed rules so merges and posts wait for your OK, and a panel that wakes the Mate when you act on the board and shows each engineer's ticket above its prompt.",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "types": "./types/index.d.ts",
   "author": {
     "name": "Keelcrew contributors"

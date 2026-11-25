@@ -2,7 +2,7 @@
   "name": "keelcrew-board",
   "version": "0.1.0",
   "private": true,
-  "license": "MIT",
+  "license": "Apache-2.0",
   "description": "The Keelcrew board: Keelcrew's UI, published as a private claude.ai artifact.",
   "type": "module",
   "scripts": {

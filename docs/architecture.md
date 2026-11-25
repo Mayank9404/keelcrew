@@ -29,12 +29,12 @@ plugins/keelcrew/                 the Claude Code plugin (installed from the mar
   cli/keelctl.mjs                    the `keelctl` command (~/.keelcrew/bin/keelctl links to it)
   helper/server.mjs               the local MCP server the board calls ("keelcrew-local"; the app runs it through ~/.keelcrew/bin/keelcrew-helper)
   board/                          the built Keelcrew board /keel-setup publishes (index.html, app.css, the .js modules, capabilities.json, manifest.json, NOTICES.md)
-  LICENSE
+  LICENSE, NOTICE
 board/                            Keelcrew board source (React + Vite); `npm run build` writes the page into plugins/keelcrew/board/
 docs/                             this file, agents.md (writing an agent), install.md
 scripts/test.mjs                  runs every suite: hooks, core, helper, mod, board, type checks
 scripts/pack.mjs                  zips the last commit to share (dist/keelcrew-<version>.zip)
-LICENSE                           MIT
+LICENSE, NOTICE                   Apache-2.0
 ```
 
 ## State on the Mac (`~/.keelcrew`, or `KEELCREW_HOME`)
