@@ -9,15 +9,17 @@ About 15 minutes on a Mac with the Claude desktop app, signed in on a paid Claud
 
 ## 1. Install the plugin
 
-In Terminal, add this repository as a plugin marketplace, install the plugin from it, and open a new Code session in the Claude app with `/keel-setup` typed in, in one line:
+**In Terminal**, one line: install Keelcrew from this repository's marketplace and open a new Code session in the Claude app with `/keel-setup` typed in:
 
 ```bash
-claude plugin marketplace add Mayank9404/keelcrew && claude plugin install keelcrew@keelcrew && open "claude://code/new?q=%2Fkeel-setup"
+claude plugin install keelcrew --marketplace Mayank9404/keelcrew && open "claude://code/new?q=%2Fkeel-setup"
 ```
 
 The last part is the Claude app's own link for a new Code session (`q` fills in the prompt without sending it). If it doesn't open, start a Code session yourself and type `/keel-setup`.
 
-This needs Claude Code's `claude` command, 2.1.326 or newer (`brew install --cask claude-code` if you don't have it; `claude --version` shows yours). That's the version Keelcrew is tested on; an engine without `$.theme` doesn't load the panel, since the panel guards its look with a hook on it.
+This needs Claude Code's `claude` command, 2.1.326 or newer (`claude --version` shows yours). Without it, install it with `curl -fsSL https://claude.ai/install.sh | bash`, which keeps it up to date. That's the version Keelcrew is tested on; an engine without `$.theme` doesn't load the panel, since the panel guards its look with a hook on it.
+
+**Or in the Claude app**, without Terminal: open **Customize → Plugins → Add → Add marketplace**, enter `Mayank9404/keelcrew`, and click **Install** on Keelcrew. Then start a new Code session and type `/keel-setup`.
 
 Sessions that start from now on load it; a session already open picks it up with `/reload-plugins`.
 
@@ -81,7 +83,7 @@ Setup leaves the session running as your Mate. If you open a new session in the 
 
 ## Updating
 
-In Terminal:
+Installed from the Claude app? Update it in **Customize → Plugins**. Installed in Terminal:
 
 ```bash
 claude plugin marketplace update keelcrew && claude plugin update keelcrew@keelcrew
@@ -94,7 +96,7 @@ Open a new Code session and let it start: it points `~/.keelcrew/bin` at the new
 1. Tell the Mate to turn off every scheduled job (or switch them off in board Settings → Crew), so no scheduled task keeps running. Any that are left show in the Claude app's scheduled tasks, where you can delete them.
 2. For each engineer or agent worktree still registered, run `~/.keelcrew/bin/keelctl unregister <worktree>`: it points the worktree's git hooks back at the repo's own (Keelcrew's push check sits in `~/.keelcrew/githooks`).
 3. In the Claude app, uninstall **keelcrew-local** (Settings → Extensions). If you added it to the app's config instead, quit the app and remove the `keelcrew-local` entry from its config.
-4. In Terminal: `claude plugin uninstall keelcrew@keelcrew` and `claude plugin marketplace remove keelcrew`.
+4. In Terminal: `claude plugin uninstall keelcrew@keelcrew` and `claude plugin marketplace remove keelcrew`. If you installed it from the Claude app, remove it in **Customize → Plugins** instead.
 5. Setup put `permissions.defaultMode: "auto"` and `autoCompactWindow` in `<Mate folder>/.claude/settings.local.json`; remove them if you don't want them for other sessions there.
 6. `~/.keelcrew` holds your crew's state and the Mate's memory. Keep it if you might come back; delete it to start fresh. The board is an artifact in your claude.ai account: delete it there if you want it gone.
 
