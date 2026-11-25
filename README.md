@@ -31,25 +31,17 @@ By default engineers push their branch and open their own PR; switch shipping to
 
 ## Get started
 
-> [!TIP]
-> **One command in Terminal, or a few clicks in the Claude app.**
->
-> **In Terminal, one line:**
->
-> ```bash
-> claude plugin install keelcrew --marketplace Mayank9404/keelcrew && open "claude://code/new?q=Set%20up%20Keelcrew"
-> ```
->
-> It installs Keelcrew and opens a new Code session in the Claude app with **Set up Keelcrew** typed in. Pick the folder that holds your repos and press Enter. No `claude` command yet? Run `curl -fsSL https://claude.ai/install.sh | bash` first.
->
-> **Or in the Claude app, no Terminal:**
->
-> 1. Open **Customize → Plugins → Add → Add marketplace**, enter `Mayank9404/keelcrew`, and click **Install** on Keelcrew.
-> 2. Start a new Code session in the folder that holds your repos and send **Set up Keelcrew**.
->
-> Prefer a command? Type `/keel-setup` instead; it does the same.
->
-> **Then** answer setup's one message and click **Install** when the app asks. That session is now your Mate: tell it `start BRIN-123`, or just describe a task.
+1. **Install Keelcrew.** In Terminal:
+
+   ```bash
+   claude plugin install keelcrew --marketplace Mayank9404/keelcrew && open "claude://code/new?q=Set%20up%20Keelcrew"
+   ```
+
+   No Terminal? In the Claude app, open **Customize → Plugins → Add → Add marketplace**, enter `Mayank9404/keelcrew`, and click **Install** on Keelcrew. No `claude` command yet? Run `curl -fsSL https://claude.ai/install.sh | bash` first.
+
+2. **Set it up.** In a new Code session in the folder that holds your repos, send **Set up Keelcrew** (the Terminal line opens that session with it typed in), or type `/keel-setup`. Answer setup's one message and click **Install** when the app asks.
+
+3. **Start working.** That session is now your Mate: tell it `start BRIN-123`, or just describe a task.
 
 <sub>You need a Mac with the Claude desktop app (its Claude Code 2.1.326 or newer), Node 20 or newer, git, the GitHub CLI signed in (`gh auth login`) for pull requests, and a paid Claude plan (Pro or higher), since the board is a published artifact. [docs/install.md](docs/install.md) covers connectors, updating and removing.</sub>
 
