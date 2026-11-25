@@ -1,6 +1,6 @@
 # Keelcrew
 
-**A crew of Claude Code sessions that works your tickets while you keep the helm.**
+**A whole AI crew inside Claude Code. It builds, reviews, tests, writes and reports, and you decide what ships.**
 
 <p align="center"><a href="#get-started"><img src="https://img.shields.io/badge/Install-one%20command-1f6feb?style=for-the-badge" alt="Install: one command"></a></p>
 <p align="center">
@@ -11,10 +11,10 @@
 </p>
 
 <p align="center">
-  <img src="docs/media/harbour-light.gif" alt="A recreation of the Mate's session in the Claude app, animated: its chat with a launch card, a crew card and a refused push, over a night harbour with today's watches, the crew moored at a jetty and a lighthouse sweeping its beam">
+  <img src="docs/media/board.webp" alt="The Keelcrew board: the crew proposes a fix for a KeyError behind 37 production errors and you click Start it, a writer's release-notes draft is approved to post, then the Deck shows the crew at work aboard a 3D ship at night">
 </p>
 
-Keelcrew is a Claude Code plugin for developers on a Mac who work from Jira or a task list. One Claude Code session, the **Mate**, runs the others: it gives each ticket an engineer session in its own git worktree, with a reviewer and QA behind it, and shows the work on your own private **Keelcrew board**.
+Keelcrew is a Claude Code plugin for the Mac. One Claude Code session, the **Mate**, runs a crew of others: an engineer for each ticket or task, in its own git worktree with a reviewer and QA behind it, agents for docs, release notes and data questions, and more you can switch on for support triage, product memos, inbox digests and morning briefs. Everything shows up on your own private **Keelcrew board**.
 
 By default engineers push their branch and open their own PR; switch shipping to card mode and a ready PR waits for your signature. Agents that draft mail, chat replies, docs or release notes post only after you approve.
 
@@ -57,7 +57,9 @@ By default engineers push their branch and open their own PR; switch shipping to
 
 ### 1. Ask the Mate
 
-Tell the Mate what you need in its session, as at the top of this page. It answers with cards you can act on in the chat. Its look, Harbour light, puts the crew around the conversation: the lighthouse flies a pennant while something waits for you, and each engineer is a boat at the jetty.
+Tell the Mate what you need in its session. It answers with cards you can act on in the chat. Its look, Harbour light, puts the crew around the conversation: the lighthouse flies a pennant while something waits for you, and each engineer is a boat at the jetty.
+
+<img src="docs/media/harbour-light.gif" alt="A recreation of the Mate's session in the Claude app, animated: its chat with a launch card, a crew card and a refused push, over a night harbour with today's watches, the crew moored at a jetty and a lighthouse sweeping its beam">
 
 ### 2. Watch the crew work
 

@@ -2,7 +2,7 @@
   "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
   "name": "keelcrew",
   "version": "0.2.0",
-  "description": "A crew of Claude Code sessions inside the Claude app: a Mate that learns how you work and staffs tickets and tasks with switchable agents, a private Keelcrew board, team packs, fixed rules so merges and posts wait for your OK, and a panel that wakes the Mate when you act on the board and shows each engineer's ticket above its prompt.",
+  "description": "A whole AI crew inside Claude Code that builds, reviews, tests, writes and reports: a Mate that learns how you work and staffs tickets and tasks with switchable agents, a private Keelcrew board, team packs, fixed rules so merges and posts wait for your OK, and a panel that wakes the Mate when you act on the board and shows each engineer's ticket above its prompt.",
   "homepage": "https://github.com/Mayank9404/keelcrew",
   "repository": "https://github.com/Mayank9404/keelcrew",
   "license": "Apache-2.0",
