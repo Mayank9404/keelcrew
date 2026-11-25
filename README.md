@@ -2,7 +2,7 @@
 
 **A crew of Claude Code sessions that works your tickets while you keep the helm.**
 
-<p align="center"><a href="#get-started"><img src="https://img.shields.io/badge/Get%20started-a%20few%20minutes%20on%20a%20Mac-1f6feb?style=for-the-badge" alt="Get started: a few minutes on a Mac"></a></p>
+<p align="center"><a href="#get-started"><img src="https://img.shields.io/badge/Install-one%20command-1f6feb?style=for-the-badge" alt="Install: one command"></a></p>
 
 <p align="center">
   <img src="docs/media/harbour-light.gif" alt="A recreation of the Mate's session in the Claude app, animated: its chat with a launch card, a crew card and a refused push, over a night harbour with today's watches, the crew moored at a jetty and a lighthouse sweeping its beam">
@@ -26,24 +26,26 @@ Messages and comments wait for your OK. By default engineers push their branch a
 ## Get started
 
 > [!TIP]
-> **A few minutes on a Mac with the Claude desktop app.** Pick either way.
+> **One command in Terminal, or a few clicks in the Claude app.**
 >
 > **In Terminal, one line:**
 >
 > ```bash
-> claude plugin install keelcrew --marketplace Mayank9404/keelcrew && open "claude://code/new?q=%2Fkeel-setup"
+> claude plugin install keelcrew --marketplace Mayank9404/keelcrew && open "claude://code/new?q=Set%20up%20Keelcrew"
 > ```
 >
-> It installs Keelcrew and opens a new Code session in the Claude app with `/keel-setup` typed in. No `claude` command yet, or one older than 2.1.326? Run `curl -fsSL https://claude.ai/install.sh | bash` first.
+> It installs Keelcrew and opens a new Code session in the Claude app with **Set up Keelcrew** typed in. Pick the folder that holds your repos and press Enter. No `claude` command yet? Run `curl -fsSL https://claude.ai/install.sh | bash` first.
 >
 > **Or in the Claude app, no Terminal:**
 >
 > 1. Open **Customize → Plugins → Add → Add marketplace**, enter `Mayank9404/keelcrew`, and click **Install** on Keelcrew.
-> 2. Start a new Code session, type `/keel-setup` and press Enter.
+> 2. Start a new Code session in the folder that holds your repos and send **Set up Keelcrew**.
 >
-> **Then** pick the folder that holds your repos and press Enter. Answer its one message and click **Install** when the app asks. That session is now your Mate: tell it `start BRIN-123`, or just describe a task.
+> Prefer a command? Type `/keel-setup` instead; it does the same.
+>
+> **Then** answer setup's one message and click **Install** when the app asks. That session is now your Mate: tell it `start BRIN-123`, or just describe a task.
 
-<sub>You also need Node 20 or newer, git, the GitHub CLI signed in (`gh auth login`) for pull requests, and a paid Claude plan (Pro or higher), since the board is a published artifact. [docs/install.md](docs/install.md) covers connectors, updating and removing.</sub>
+<sub>You need a Mac with the Claude desktop app (its Claude Code 2.1.326 or newer), Node 20 or newer, git, the GitHub CLI signed in (`gh auth login`) for pull requests, and a paid Claude plan (Pro or higher), since the board is a published artifact. [docs/install.md](docs/install.md) covers connectors, updating and removing.</sub>
 
 ## How it works
 

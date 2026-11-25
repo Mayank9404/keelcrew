@@ -9,17 +9,17 @@ About 15 minutes on a Mac with the Claude desktop app, signed in on a paid Claud
 
 ## 1. Install the plugin
 
-**In Terminal**, one line: install Keelcrew from this repository's marketplace and open a new Code session in the Claude app with `/keel-setup` typed in:
+**In Terminal**, one line: install Keelcrew from this repository's marketplace and open a new Code session in the Claude app with **Set up Keelcrew** typed in:
 
 ```bash
-claude plugin install keelcrew --marketplace Mayank9404/keelcrew && open "claude://code/new?q=%2Fkeel-setup"
+claude plugin install keelcrew --marketplace Mayank9404/keelcrew && open "claude://code/new?q=Set%20up%20Keelcrew"
 ```
 
-The last part is the Claude app's own link for a new Code session (`q` fills in the prompt without sending it). If it doesn't open, start a Code session yourself and type `/keel-setup`.
+The last part is the Claude app's own link for a new Code session (`q` fills in the prompt without sending it): pick the folder that holds your repos and press Enter. If it doesn't open, start a Code session there yourself and send **Set up Keelcrew**, or type `/keel-setup`; both start the same setup.
 
-This needs Claude Code's `claude` command, 2.1.326 or newer (`claude --version` shows yours). Without it, install it with `curl -fsSL https://claude.ai/install.sh | bash`, which keeps it up to date. That's the version Keelcrew is tested on; an engine without `$.theme` doesn't load the panel, since the panel guards its look with a hook on it.
+The one-line install needs Claude Code's `claude` command, 2.1.292 or newer (`claude --version` shows yours). Without it, install it with `curl -fsSL https://claude.ai/install.sh | bash`, which keeps it up to date. Keelcrew itself runs in the Claude app, whose own Claude Code must be 2.1.326 or newer (update the app if it's older). That's the version Keelcrew is tested on; an engine without `$.theme` doesn't load the panel, since the panel guards its look with a hook on it.
 
-**Or in the Claude app**, without Terminal: open **Customize → Plugins → Add → Add marketplace**, enter `Mayank9404/keelcrew`, and click **Install** on Keelcrew. Then start a new Code session and type `/keel-setup`.
+**Or in the Claude app**, without Terminal: open **Customize → Plugins → Add → Add marketplace**, enter `Mayank9404/keelcrew`, and click **Install** on Keelcrew. Then start a new Code session in the folder that holds your repos and send **Set up Keelcrew** (or type `/keel-setup`).
 
 Sessions that start from now on load it; a session already open picks it up with `/reload-plugins`.
 

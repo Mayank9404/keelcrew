@@ -1,8 +1,7 @@
 ---
 name: keel-setup
-description: One-time Keelcrew setup on this Mac (captain's name, Mate folder and repos, where tasks come from, team pack, Keelcrew board, checks), ending with this session running as the Mate
+description: One-time Keelcrew setup on this Mac (captain's name, Mate folder and repos, where tasks come from, team pack, Keelcrew board, checks), ending with this session running as the Mate. Use when the user asks to set up Keelcrew (for example "Set up Keelcrew") or runs /keel-setup.
 argument-hint: [Keelcrew board artifact URL]
-disable-model-invocation: true
 ---
 
 Set up Keelcrew for the captain, in this session, and finish as their running Mate in the same turn: the captain answers one message, clicks Install once and approves the Auto mode card, nothing else (no Terminal, no restart, no "start the crew"). It must run in the Mate folder: the folder that holds the git repos the crew works in. The plugin lives in `${CLAUDE_PLUGIN_ROOT}`; `keelctl` below means `node "${CLAUDE_PLUGIN_ROOT}/cli/keelctl.mjs"` until step 6 installs `~/.keelcrew/bin/keelctl`. Keep it short: one line per step done, and every question in step 2 asked at once.
