@@ -39,6 +39,14 @@ By default engineers push their branch and open their own PR; switch shipping to
 
    No Terminal? In the Claude app, open **Customize → Plugins → Add → Add marketplace**, enter `Mayank9404/keelcrew`, and click **Install** on Keelcrew. No `claude` command yet? Run `curl -fsSL https://claude.ai/install.sh | bash` first.
 
+   Or let Claude do it. In any Claude Code session, send:
+
+   ```text
+   Install Keelcrew by following https://raw.githubusercontent.com/Mayank9404/keelcrew/main/llms-install.md
+   ```
+
+   Claude checks what you need, installs Keelcrew and opens setup for you.
+
 2. **Set it up.** In a new Code session in the folder that holds your repos, send **Set up Keelcrew** (the Terminal line opens that session with it typed in), or type `/keel-setup`. Answer setup's one message and click **Install** when the app asks.
 
 3. **Start working.** That session is now your Mate: tell it `start BRIN-123`, or just describe a task.
