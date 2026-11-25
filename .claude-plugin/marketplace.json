@@ -9,6 +9,19 @@
       "name": "keelcrew",
       "source": "./plugins/keelcrew",
       "license": "Apache-2.0",
+      "category": "development",
+      "keywords": [
+        "claude-code",
+        "agents",
+        "multi-agent",
+        "jira",
+        "code-review",
+        "git-worktrees",
+        "pull-requests",
+        "developer-tools",
+        "macos"
+      ],
+      "homepage": "https://github.com/Mayank9404/keelcrew",
       "description": "A crew of Claude Code sessions inside the Claude app: a Mate (first mate) that learns your style, switchable agents (engineer, QA, reviewer, analyst, writer and more), a private Keelcrew board, team packs, fixed rules so merges and posts wait for your OK, and a panel that wakes the Mate when you act on the board."
     }
   ]
